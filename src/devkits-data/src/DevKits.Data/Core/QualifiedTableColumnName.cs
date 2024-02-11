@@ -2,31 +2,41 @@
 using DevKits.OddsAndEnds.Core.Text;
 
 /// <summary>
-/// A qualified table column name. This class cannot be inherited.
+/// Represents a fully qualified name for a database table column, encapsulating the schema, table, and column names.
+/// This class provides functionality to manage and manipulate qualified column names, including support for quoting and comparisons.
+/// This class cannot be inherited.
 /// </summary>
-///
+/// <remarks>
+/// This class is useful in scenarios where database operations require precise identification of columns, especially in environments
+/// with multiple schemas or where column names may conflict without full qualification.
+/// </remarks>
 /// <seealso cref="IEquatable{QualifiedTableColumnName}"/>
 public sealed class QualifiedTableColumnName : IEquatable<QualifiedTableColumnName>
 {
-
+    /// <summary>
+    /// Gets the qualified name of the table to which the column belongs.
+    /// </summary>
+    /// <value>The qualified name of the table.</value>
     public QualifiedTableName QualifiedTableName { get; }
+
+    /// <summary>
+    /// Gets the name of the column.
+    /// </summary>
+    /// <value>The name of the column.</value>
     public string ColumnName { get; }
 
     /// <summary>
-    /// Gets the the quoted column.
+    /// Gets the quoted name of the column, ensuring it is formatted correctly for use in SQL queries.
     /// </summary>
-    ///
-    /// <value>The name of the quoted column.</value>
+    /// <value>The quoted name of the column.</value>
     public string QuotedColumnName => TSQLRosetta.QuoteName(ColumnName)!;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="object" /> class.
+    /// Initializes a new instance of the <see cref="QualifiedTableColumnName"/> class with a specified qualified table name and column name.
     /// </summary>
-    ///
-    /// <exception cref="ArgumentNullException">Thrown when one or more required arguments are null.</exception>
-    ///
-    /// <param name="qualifiedTableName">Name of the table.</param>
-    /// <param name="columnName">Name of the column.</param>
+    /// <param name="qualifiedTableName">The fully qualified name of the table.</param>
+    /// <param name="columnName">The name of the column.</param>
+    /// <exception cref="ArgumentNullException">Thrown if either <paramref name="qualifiedTableName"/> or <paramref name="columnName"/> is null.</exception>
     public QualifiedTableColumnName(QualifiedTableName qualifiedTableName, string columnName)
     {
         QualifiedTableName = qualifiedTableName ?? throw new ArgumentNullException(nameof(qualifiedTableName));
@@ -34,35 +44,34 @@ public sealed class QualifiedTableColumnName : IEquatable<QualifiedTableColumnNa
     }
 
     /// <summary>
-    /// Initializes a new instance of the DevKits.Data.Core.QualifiedTableColumnName class.
+    /// Initializes a new instance of the <see cref="QualifiedTableColumnName"/> class with specified schema name, table name, and column name.
     /// </summary>
-    ///
-    /// <exception cref="ArgumentNullException">Thrown when one or more required arguments are null.</exception>
-    ///
-    /// <param name="schemaName">Name of the schema.</param>
-    /// <param name="tableName">Name of the table.</param>
-    /// <param name="columnName">Name of the column.</param>
+    /// <param name="schemaName">The name of the schema.</param>
+    /// <param name="tableName">The name of the table.</param>
+    /// <param name="columnName">The name of the column.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="schemaName"/>, <paramref name="tableName"/>, or <paramref name="columnName"/> is null.</exception>
     public QualifiedTableColumnName(string schemaName, string tableName, string columnName)
     {
         ArgumentNullException.ThrowIfNull(schemaName);
         ArgumentNullException.ThrowIfNull(tableName);
+        ColumnName = columnName ?? throw new ArgumentNullException(nameof(columnName));
 
         QualifiedTableName = new QualifiedTableName(schemaName, tableName);
-        ColumnName = columnName ?? throw new ArgumentNullException(nameof(columnName));
     }
 
-    /// <summary>Returns a string that represents the current object.</summary>
-    /// <returns>A string that represents the current object.</returns>
+    /// <summary>
+    /// Returns a string that represents the current <see cref="QualifiedTableColumnName"/> object.
+    /// </summary>
+    /// <returns>A string that represents the current object, formatted as 'SchemaName.TableName.ColumnName'.</returns>
     public override string ToString()
     {
         return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName, ColumnName) ?? string.Empty;
     }
 
     /// <summary>
-    /// Converts this QualifiedTableColumnName to a quoted SQL string.
+    /// Converts this <see cref="QualifiedTableColumnName"/> to a quoted SQL string, suitable for use in SQL queries.
     /// </summary>
-    ///
-    /// <returns>This QualifiedTableColumnName as a string.</returns>
+    /// <returns>A quoted string representing this fully qualified column name.</returns>
     public string ToQuotedSqlString()
     {
         return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName.ToQuotedSqlString(), TSQLRosetta.QuoteName(ColumnName)) ?? string.Empty;

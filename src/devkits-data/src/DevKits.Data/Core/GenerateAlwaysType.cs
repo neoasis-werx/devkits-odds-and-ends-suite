@@ -1,4 +1,4 @@
-﻿namespace DevKits.Data;
+﻿namespace DevKits.Data.Core;
 
 public enum GenerateAlwaysType
 {

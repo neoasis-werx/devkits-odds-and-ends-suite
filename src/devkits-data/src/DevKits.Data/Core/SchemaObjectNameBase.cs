@@ -1,26 +1,35 @@
 namespace DevKits.Data.Core;
 using DevKits.OddsAndEnds.Core.Text;
 
+/// <summary>
+/// Serves as the base class for representing a database object name with optional schema specification.
+/// This class provides foundational functionality for parsing, storing, and accessing the names of schema-owned database objects.
+/// </summary>
 public class SchemaObjectNameBase : ISchemaObjectName
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="SchemaObjectNameBase"/> class using a fully qualified SQL object name.
+    /// This constructor parses the qualified SQL object name to extract the schema and object names.
     /// </summary>
-    /// <param name="qualifiedSqlObjectName">Name of the qualified SQL object.</param>
+    /// <param name="qualifiedSqlObjectName">The fully qualified name of the SQL object, including the schema name and object name.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="qualifiedSqlObjectName"/> is null.</exception>
+    /// <remarks>
+    /// If the schema name is not specified in <paramref name="qualifiedSqlObjectName"/>, the default schema ('dbo') is assumed.
+    /// </remarks>
     protected SchemaObjectNameBase(string qualifiedSqlObjectName)
     {
         ArgumentNullException.ThrowIfNull(qualifiedSqlObjectName);
 
-        var o = TSQLRosetta.ParseNameComponents(qualifiedSqlObjectName);
-
-        MyObjectName = o.ObjectName ?? qualifiedSqlObjectName;
-        SchemaName = o.SchemaName ?? "dbo";
+        var parsedName = TSQLRosetta.ParseNameComponents(qualifiedSqlObjectName);
+        MyObjectName = parsedName.ObjectName ?? qualifiedSqlObjectName;
+        SchemaName = parsedName.SchemaName ?? "dbo";
     }
 
     /// <summary>
-    ///     Copy Constructor for <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="SchemaObjectNameBase"/> class by copying an existing instance.
     /// </summary>
-    /// <param name="source">Source for the.</param>
+    /// <param name="source">The instance of <see cref="SchemaObjectNameBase"/> to copy.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="source"/> is null.</exception>
     protected SchemaObjectNameBase(SchemaObjectNameBase source)
     {
         ArgumentNullException.ThrowIfNull(source);
@@ -29,10 +38,11 @@ public class SchemaObjectNameBase : ISchemaObjectName
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="SchemaObjectNameBase"/> class with an optional schema name and a mandatory object name.
     /// </summary>
-    /// <param name="schemaName">Name of the schema [optional]</param>
-    /// <param name="myObjectName">Name of the Schema owned Object.</param>
+    /// <param name="schemaName">The name of the schema. If null, the default schema ('dbo') is used.</param>
+    /// <param name="myObjectName">The name of the object owned by the schema.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="myObjectName"/> is null.</exception>
     protected SchemaObjectNameBase(string? schemaName, string myObjectName)
     {
         ArgumentNullException.ThrowIfNull(myObjectName);
@@ -40,11 +50,24 @@ public class SchemaObjectNameBase : ISchemaObjectName
         MyObjectName = myObjectName;
     }
 
+    /// <summary>
+    /// Gets the name of the schema.
+    /// </summary>
+    /// <value>The name of the schema. Defaults to 'dbo' if not specified.</value>
     public string SchemaName { get; }
+
+    /// <summary>
+    /// Gets the name of the object owned by the schema. Protected access modifier is used to limit modifications to derived classes.
+    /// </summary>
+    /// <value>The name of the object within the schema.</value>
     protected string MyObjectName { get; }
 
-
+    /// <summary>
+    /// Implements the <see cref="ISchemaObjectName.ObjectName"/> property to expose the name of the object.
+    /// </summary>
+    /// <value>The name of the object.</value>
     string ISchemaObjectName.ObjectName => MyObjectName;
+
 
     #region Formatting
 
@@ -236,9 +259,5 @@ public class SchemaObjectNameBase : ISchemaObjectName
     #endregion
 
     #endregion
-
-
-
-
 
 }

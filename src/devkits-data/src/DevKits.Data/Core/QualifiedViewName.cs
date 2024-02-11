@@ -1,29 +1,34 @@
 namespace DevKits.Data.Core;
 using DevKits.OddsAndEnds.Core.Text;
 
+
+/// <summary>
+/// Represents a fully qualified name for a view in a database schema, providing utility methods for equality comparison
+/// and implicit conversion from strings. This class extends <see cref="SchemaObjectNameBase"/> to specifically handle view names.
+/// </summary>
 public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<QualifiedViewName?>
 {
     /// <summary>
-    ///     Initializes a new instance of the <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="QualifiedViewName"/> class using a fully qualified SQL object name.
     /// </summary>
-    /// <param name="qualifiedSqlObjectName">Name of the qualified SQL object.</param>
+    /// <param name="qualifiedSqlObjectName">The fully qualified name of the SQL object.</param>
     public QualifiedViewName(string qualifiedSqlObjectName) : base(qualifiedSqlObjectName)
     {
     }
 
     /// <summary>
-    ///     Copy Constructor for <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="QualifiedViewName"/> class by copying an existing instance.
     /// </summary>
-    /// <param name="source">Source for the.</param>
+    /// <param name="source">The instance of <see cref="QualifiedViewName"/> to copy.</param>
     public QualifiedViewName(QualifiedViewName source) : base(source)
     {
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="SchemaObjectNameBase" /> class.
+    /// Initializes a new instance of the <see cref="QualifiedViewName"/> class using separate schema and table names.
     /// </summary>
-    /// <param name="schemaName">Name of the schema [optional]</param>
-    /// <param name="objectName">Name of the Schema owned Object.</param>
+    /// <param name="schemaName">The name of the schema. This parameter is optional.</param>
+    /// <param name="objectName">The name of the schema-owned table object.</param>
     public QualifiedViewName(string schemaName, string objectName) : base(schemaName, objectName)
     {
     }
@@ -31,17 +36,14 @@ public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<Qualifi
     /// <summary>
     /// Gets the name of the view.
     /// </summary>
-    ///
-    /// <value>The name of the view.</value>
+    /// <value>The name of the view represented by this instance.</value>
     public string ViewName => MyObjectName;
 
     /// <summary>
-    /// Implicit cast that converts the given string to a QualifiedViewName.
+    /// Defines an implicit conversion of a string to a <see cref="QualifiedViewName"/>.
     /// </summary>
-    ///
-    /// <param name="source">Source for the.</param>
-    ///
-    /// <returns>The result of the operation.</returns>
+    /// <param name="source">The string to convert to a <see cref="QualifiedViewName"/>.</param>
+    /// <returns>A <see cref="QualifiedViewName"/> that represents the table name specified by the <paramref name="source"/>.</returns>
     public static implicit operator QualifiedViewName(string source)
     {
         return new QualifiedViewName(source);
@@ -81,7 +83,7 @@ public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<Qualifi
 
     /// <summary>
     ///     Returns a value that indicates whether the values of two
-    ///     <see cref="T:DevKits.CodeGen.QualifiedSQLObjectName" /> objects are equal.
+    ///     <see cref="QualifiedViewName" /> objects are equal.
     /// </summary>
     /// <param name="left">The first value to compare.</param>
     /// <param name="right">The second value to compare.</param>
@@ -95,7 +97,7 @@ public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<Qualifi
     }
 
     /// <summary>
-    ///     Returns a value that indicates whether two <see cref="T:DevKits.CodeGen.QualifiedSQLObjectName" /> objects
+    ///     Returns a value that indicates whether two <see cref="QualifiedViewName" /> objects
     ///     have different values.
     /// </summary>
     /// <param name="left">The first value to compare.</param>
