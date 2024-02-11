@@ -23,6 +23,27 @@ public static class CaseInsensitiveHashCode
         return combinedHashCode;
     }
 
+
+    /// <summary>
+    ///     Combines multiple hash codes for strings in a case-insensitive manner.
+    /// </summary>
+    /// <param name="strings">An array of strings for which to combine hash codes.</param>
+    /// <returns>The combined hash code for the specified strings.</returns>
+    public static int Combine(IEnumerable<string>? strings)
+    {
+        var combinedHashCode = 0;
+
+        if (strings == null) return combinedHashCode;
+
+        foreach (var str in strings)
+        {
+            // Using StringComparer.OrdinalIgnoreCase to ensure case-insensitive comparison
+            combinedHashCode = Combine(combinedHashCode, StringComparer.OrdinalIgnoreCase.GetHashCode(str));
+        }
+
+        return combinedHashCode;
+    }
+
     /// <summary>
     ///     Combines two hash codes.
     /// </summary>

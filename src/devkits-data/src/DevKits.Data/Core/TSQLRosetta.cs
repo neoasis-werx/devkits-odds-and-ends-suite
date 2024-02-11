@@ -302,6 +302,50 @@ namespace DevKits.Data.Core
             return string.Join(delimiter, stringArgs.Where(s => !string.IsNullOrEmpty(s)));
         }
 
+
+        /// <summary>
+        /// Compares two lists of strings to determine if they are equal.
+        /// </summary>
+        /// <param name="source">The first list of strings to compare.</param>
+        /// <param name="other">The second list of strings to compare.</param>
+        /// <returns>
+        /// <c>true</c> if both lists contain the same strings in the same order; otherwise, <c>false</c>.
+        /// Returns <c>true</c> if both lists are null.
+        /// </returns>
+        /// <remarks>
+        /// This method performs an ordinal comparison of each string in the lists.
+        /// Null lists are considered equal, but a null list is not equal to a non-null list.
+        /// The comparison is case-insensitive and depends on the implementation of <see cref="TSQLRosetta.AreEqual(string,string)"/>
+        /// for comparing individual string elements.
+        /// </remarks>
+        public static bool AreEquals(IList<string>? source, IList<string>? other)
+        {
+            // Check if both source and other are null, which are considered equal
+            if (source == null && other == null) return true;
+
+            // If only one is null, they are not equal
+            if (source == null || other == null) return false;
+
+            // Lists with different counts cannot be equal
+            if (source.Count != other.Count) return false;
+
+            // Iterate through the lists comparing each corresponding element
+            for (var i = 0; i < source.Count; i++)
+            {
+                // Use TSQLRosetta.AreEqual to compare the elements
+                // If any pair of elements is not equal, the lists are not equal
+                if (!TSQLRosetta.AreEqual(source[i], other[i]))
+                {
+                    return false;
+                }
+            }
+
+            // If all elements are equal, return true
+            return true;
+        }
+
+
+
     }
 }
 

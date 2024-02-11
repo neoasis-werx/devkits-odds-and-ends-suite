@@ -93,25 +93,3 @@ public enum ColumnAttributes
     /// </summary>
     IsTimeStamp = 65536
 }
-
-//[Flags]
-//public enum ColumnAttributes
-//{
-//    None = 0,
-//    IsNullable = 1,
-//    IsUpdatable = 2,
-//    IsPrimaryKey = 4,
-//    IsUniqueKey = 8,
-//    IsAutoNumber = 16,
-//    IsForeignKey = 32,
-//    IsIndexed = 64,
-//    IsComputed = 128,
-//    IsRowGuidColumn = 256,
-//    IsGeneratedAlways = 512,
-//    IsGeneratedAlwaysAtRowStart = 1024,
-//    IsGeneratedAlwaysAtRowEnd = 2048,
-//    IsFileStream = 8192,
-//    IsXmlDocument = 16384,
-//    IsColumnSet = 32768,
-//    IsTimeStamp = 65536
-//}

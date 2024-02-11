@@ -47,20 +47,3 @@ public enum TableAttributes
     /// </summary>
     IsCompositeKeyed = 32,
 }
-
-
-
-
-
-
-//[Flags]
-//public enum TableAttributes
-//{
-//    None = 0,
-//    IsHistoryTableForSystemVersionedTable = 1,
-//    IsSystemVersionedTemporalTable = 2,
-//    IsUserTable = 4,
-//    IsUserTableType = 8,
-//    IsAutoNumbered = 16,
-//    IsCompositeKeyed = 32,
-//}
