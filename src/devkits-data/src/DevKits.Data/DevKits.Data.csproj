@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Deterministic>True</Deterministic>
+    <Authors>Deerwood McCord, Jr</Authors>
+    <Company>Neoasis</Company>
+    <Title>DevKits Data Tools</Title>
+    <Description>DevKits Data Tools</Description>
+    <PackageId>Neoasis.DevKits.Data</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Chi.Core" Version="3.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\devkits-oddsandends-core\src\DevKits.OddsAndEnds.Core\DevKits.OddsAndEnds.Core.csproj" />
+  </ItemGroup>
+</Project>
