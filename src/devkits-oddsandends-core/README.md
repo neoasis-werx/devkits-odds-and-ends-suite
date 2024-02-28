@@ -7,6 +7,6 @@
 ### DevKits Odds And Ends Core 
 
 ## Authors
-Deerwood McCord, Jr
 
+Deerwood McCord, Jr.<br/>
 Neoasis

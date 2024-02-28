@@ -136,12 +136,12 @@ namespace DevKits.Data.Core
 
             public override string ToString()
             {
-                return JoinIfNotEmpty(".", ServerName, DatabaseName, SchemaName, ObjectName) ?? string.Empty;
+                return JoinIfNotEmpty(".", ServerName, DatabaseName, SchemaName, ObjectName);
             }
 
             public string ToQuotedSqlString()
             {
-                return JoinIfNotEmpty(".", QuoteName(ServerName), QuoteName(DatabaseName), QuoteName(SchemaName), QuoteName(ObjectName)) ?? string.Empty;
+                return JoinIfNotEmpty(".", QuoteName(ServerName), QuoteName(DatabaseName), QuoteName(SchemaName), QuoteName(ObjectName));
             }
 
         }
@@ -297,7 +297,7 @@ namespace DevKits.Data.Core
         /// This method is useful for creating a concatenated string from an array of values while ignoring any null or empty values.
         /// It provides a clean way to join strings with a delimiter without needing to filter the array beforehand.
         /// </remarks>
-        public static string? JoinIfNotEmpty(string delimiter, params string?[] stringArgs)
+        public static string JoinIfNotEmpty(string delimiter, params string?[] stringArgs)
         {
             return string.Join(delimiter, stringArgs.Where(s => !string.IsNullOrEmpty(s)));
         }
@@ -343,9 +343,6 @@ namespace DevKits.Data.Core
             // If all elements are equal, return true
             return true;
         }
-
-
-
     }
 }
 

@@ -91,7 +91,7 @@ public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<Qualifi
     ///     true if the <paramref name="left" /> and <paramref name="right" /> parameters have the same value; otherwise,
     ///     false.
     /// </returns>
-    public static bool operator ==(QualifiedViewName left, QualifiedViewName right)
+    public static bool operator ==(QualifiedViewName? left, QualifiedViewName? right)
     {
         return TSQLRosetta.AreEqual(left, (ISchemaObjectName?)right);
     }
@@ -103,7 +103,7 @@ public sealed class QualifiedViewName : SchemaObjectNameBase, IEquatable<Qualifi
     /// <param name="left">The first value to compare.</param>
     /// <param name="right">The second value to compare.</param>
     /// <returns>true if <paramref name="left" /> and <paramref name="right" /> are not equal; otherwise, false.</returns>
-    public static bool operator !=(QualifiedViewName left, QualifiedViewName right)
+    public static bool operator !=(QualifiedViewName? left, QualifiedViewName? right)
     {
         return TSQLRosetta.AreNotEqual(left, right);
     }

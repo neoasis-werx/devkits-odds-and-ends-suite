@@ -149,9 +149,4 @@ public class DbObjectIdentifierTests
         EqualityTester.TestUnequalObjects(source, other);
     }
 
-    [Test()]
-    public void GetHashCodeTest()
-    {
-        Assert.Fail();
-    }
 }

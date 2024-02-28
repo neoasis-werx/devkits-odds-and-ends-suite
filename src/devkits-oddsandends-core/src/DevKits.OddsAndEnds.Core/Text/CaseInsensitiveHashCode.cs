@@ -64,19 +64,3 @@ public static class CaseInsensitiveHashCode
         }
     }
 }
-
-//class Program
-//{
-//    static void Main()
-//    {
-//        string str1 = "Hello";
-//        string str2 = "world";
-//        string str3 = "CASE";
-//        string str4 = "insensitive";
-
-//        // Combine four hash codes in a case-insensitive manner
-//        int combinedHashCode = CaseInsensitiveHashCode.Combine(str1, str2, str3, str4);
-
-//        Console.WriteLine($"Combined Hash Code: {combinedHashCode}");
-//    }
-//}

@@ -5,7 +5,12 @@ using DevKits.OddsAndEnds.Core.Text;
 /// Serves as the base class for representing a database object name with optional schema specification.
 /// This class provides foundational functionality for parsing, storing, and accessing the names of schema-owned database objects.
 /// </summary>
-public class SchemaObjectNameBase : ISchemaObjectName
+/// <remarks>
+/// This class is used to make Object specific ISchemaObjectNames for database objects. Derived classes are expected to delegate to the protected <see cref="MyObjectName"/> for example
+/// <see cref="QualifiedTableName.TableName"/> implementation is <c>public string TableName =&gt; MyObjectName;</c> and
+/// <see cref="QualifiedViewName.ViewName"/> implementation is <c>public string ViewName =&gt; MyObjectName;</c>
+/// </remarks>
+public abstract class SchemaObjectNameBase : ISchemaObjectName
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SchemaObjectNameBase"/> class using a fully qualified SQL object name.
@@ -41,13 +46,13 @@ public class SchemaObjectNameBase : ISchemaObjectName
     /// Initializes a new instance of the <see cref="SchemaObjectNameBase"/> class with an optional schema name and a mandatory object name.
     /// </summary>
     /// <param name="schemaName">The name of the schema. If null, the default schema ('dbo') is used.</param>
-    /// <param name="myObjectName">The name of the object owned by the schema.</param>
-    /// <exception cref="ArgumentNullException">Thrown if <paramref name="myObjectName"/> is null.</exception>
-    protected SchemaObjectNameBase(string? schemaName, string myObjectName)
+    /// <param name="objectName">The name of the object owned by the schema.</param>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="objectName"/> is null.</exception>
+    protected SchemaObjectNameBase(string? schemaName, string objectName)
     {
-        ArgumentNullException.ThrowIfNull(myObjectName);
+        ArgumentNullException.ThrowIfNull(objectName);
         SchemaName = schemaName ?? "dbo";
-        MyObjectName = myObjectName;
+        MyObjectName = objectName;
     }
 
     /// <summary>
@@ -58,6 +63,7 @@ public class SchemaObjectNameBase : ISchemaObjectName
 
     /// <summary>
     /// Gets the name of the object owned by the schema. Protected access modifier is used to limit modifications to derived classes.
+    /// This Method should be delegated to by the derived class in order to make the Object Specific class.
     /// </summary>
     /// <value>The name of the object within the schema.</value>
     protected string MyObjectName { get; }

@@ -43,6 +43,12 @@ public sealed class DbObjectIdentifier : IEquatable<DbObjectIdentifier>
         Parts = new List<string>(parts);
     }
 
+    public DbObjectIdentifier(ISchemaObjectName? schemaObjectName)
+    {
+        if (schemaObjectName == null) return;
+        Parts = new List<string>() { schemaObjectName.SchemaName, schemaObjectName.ObjectName };
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="DbObjectIdentifier"/> class from both external parts and regular identifier parts.
     /// External parts are used for references to objects in other databases or servers.
@@ -152,28 +158,6 @@ public sealed class DbObjectIdentifier : IEquatable<DbObjectIdentifier>
         }
 
         return TSQLRosetta.AreEquals(this.ExternalParts, other.ExternalParts) && TSQLRosetta.AreEquals(this.Parts, other.Parts);
-
-
-        //if (ExternalParts != null)
-        //{
-        //    for (var i = 0; i < ExternalParts.Count; i++)
-        //    {
-        //        if (other.ExternalParts != null && !TSQLRosetta.AreEqual(ExternalParts[i], other.ExternalParts[i]))
-        //        {
-        //            return false;
-        //        }
-        //    }
-        //}
-
-        //for (var i = 0; i < Parts.Count; i++)
-        //{
-        //    if (!TSQLRosetta.AreEqual(Parts[i], other.Parts?[i]))
-        //    {
-        //        return false;
-        //    }
-        //}
-
-       // return true;
     }
 
 
@@ -183,31 +167,6 @@ public sealed class DbObjectIdentifier : IEquatable<DbObjectIdentifier>
         int hash =  CaseInsensitiveHashCode.Combine(ExternalParts);
         int partsHashCode = CaseInsensitiveHashCode.Combine(Parts);
         return HashCode.Combine(hash, partsHashCode);
-    }
-
-    /// <summary>
-    /// Computes the hash code for the <see cref="DbObjectIdentifier"/> based on its parts.
-    /// </summary>
-    /// <returns>The computed hash code.</returns>
-    private int ComputeHashCode()
-    {
-        var hash = new HashCode();
-
-        // This should not happen but can happen when deserialized.
-        if (Parts == null) return hash.ToHashCode();
-
-        if (ExternalParts != null)
-            foreach (var part in ExternalParts)
-            {
-                hash.Add(part);
-            }
-
-        foreach (var part in Parts)
-        {
-            hash.Add(part);
-        }
-
-        return hash.ToHashCode();
     }
 
     #region Equality members
