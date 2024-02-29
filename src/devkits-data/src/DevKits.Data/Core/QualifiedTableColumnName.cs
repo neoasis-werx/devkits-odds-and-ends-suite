@@ -65,7 +65,7 @@ public sealed class QualifiedTableColumnName : IEquatable<QualifiedTableColumnNa
     /// <returns>A string that represents the current object, formatted as 'SchemaName.TableName.ColumnName'.</returns>
     public override string ToString()
     {
-        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName, ColumnName) ?? string.Empty;
+        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName, ColumnName);
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public sealed class QualifiedTableColumnName : IEquatable<QualifiedTableColumnNa
     /// <returns>A quoted string representing this fully qualified column name.</returns>
     public string ToQuotedSqlString()
     {
-        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName.ToQuotedSqlString(), TSQLRosetta.QuoteName(ColumnName)) ?? string.Empty;
+        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName.ToQuotedSqlString(), TSQLRosetta.QuoteName(ColumnName));
     }
 
 

@@ -6,15 +6,15 @@ namespace DevKits.Data;
 /// <summary>
 /// Represents a constant for a database column.
 /// </summary>
-public class ColumnConstant
+public class ColumnInfo
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ColumnConstant"/> class.
+    /// Initializes a new instance of the <see cref="ColumnInfo"/> class.
     /// </summary>
     /// <param name="tableName">The qualified table name.</param>
     /// <param name="columnName">The name of the column.</param>
     /// <param name="isUpdatable">Specifies whether the column is updatable.</param>
-    public ColumnConstant(QualifiedTableName tableName, string columnName, bool isUpdatable)
+    public ColumnInfo(QualifiedTableName tableName, string columnName, bool isUpdatable)
     {
         this.TableName = tableName;
         this.ColumnName = columnName;
@@ -25,12 +25,12 @@ public class ColumnConstant
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ColumnConstant"/> class.
+    /// Initializes a new instance of the <see cref="ColumnInfo"/> class.
     /// </summary>
     /// <param name="tableName">The qualified table name.</param>
     /// <param name="columnName">The name of the column.</param>
     /// <param name="attributes">The attributes of the column.</param>
-    public ColumnConstant(QualifiedTableName tableName, string columnName, ColumnAttributes attributes)
+    public ColumnInfo(QualifiedTableName tableName, string columnName, ColumnAttributes attributes)
     {
         this.TableName = tableName;
         this.ColumnName = columnName;
@@ -38,14 +38,14 @@ public class ColumnConstant
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ColumnConstant"/> class.
+    /// Initializes a new instance of the <see cref="ColumnInfo"/> class.
     /// </summary>
     ///
     /// <param name="tableName">The qualified table name.</param>
     /// <param name="columnName">The name of the column.</param>
     /// <param name="attributes">The attributes of the column.</param>
     /// <param name="dataTypeDefinition">Data type definition (suitable for DDL).</param>
-    public ColumnConstant(QualifiedTableName tableName, string columnName, ColumnAttributes attributes, string dataTypeDefinition)
+    public ColumnInfo(QualifiedTableName tableName, string columnName, ColumnAttributes attributes, string dataTypeDefinition)
     {
         this.TableName = tableName;
         this.ColumnName = columnName;

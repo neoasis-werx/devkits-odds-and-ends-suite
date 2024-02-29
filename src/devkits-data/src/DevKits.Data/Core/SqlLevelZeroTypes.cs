@@ -1,4 +1,4 @@
-﻿namespace DevKits.Data;
+﻿namespace DevKits.Data.Core;
 
 /// <summary>
 /// Values that represent SQL level zero types.

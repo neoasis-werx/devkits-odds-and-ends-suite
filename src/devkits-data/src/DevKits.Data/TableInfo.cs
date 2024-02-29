@@ -5,7 +5,7 @@ namespace DevKits.Data;
 /// <summary>
 /// Represents a constant for a database table.
 /// </summary>
-public class TableConstant
+public class TableInfo
 {
     /// <summary>
     /// Gets or sets the qualified table name.
@@ -50,45 +50,45 @@ public class TableConstant
     /// <summary>
     /// Gets the list of columns in the table.
     /// </summary>
-    public IReadOnlyList<ColumnConstant> Columns { get; }
+    public IReadOnlyList<ColumnInfo> Columns { get; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TableConstant"/> class.
+    /// Initializes a new instance of the <see cref="TableInfo"/> class.
     /// </summary>
     /// <param name="qualifiedTableName">The qualified table name.</param>
     /// <param name="attributes">The attributes of the table.</param>
     /// <param name="columnNames">The names and attributes of the columns.</param>
-    public TableConstant(string qualifiedTableName, int attributes, params (string ColumnName, int attributes)[] columnNames)
+    public TableInfo(string qualifiedTableName, int attributes, params (string ColumnName, int attributes)[] columnNames)
     {
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnConstant>();
+        var columnList = new List<ColumnInfo>();
 
         foreach (var column in columnNames)
         {
-            columnList.Add(new ColumnConstant(TableName, column.ColumnName, (ColumnAttributes)column.attributes));
+            columnList.Add(new ColumnInfo(TableName, column.ColumnName, (ColumnAttributes)column.attributes));
         }
 
         Columns = columnList;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TableConstant"/> class.
+    /// Initializes a new instance of the <see cref="TableInfo"/> class.
     /// </summary>
     /// <param name="qualifiedTableName">The qualified table name.</param>
     /// <param name="attributes">The attributes of the table.</param>
     /// <param name="columnNames">The names and attributes of the columns.</param>
-    public TableConstant(string qualifiedTableName, int attributes, params (string ColumnName, int attributes, string dataTypeDefinition)[] columnNames)
+    public TableInfo(string qualifiedTableName, int attributes, params (string ColumnName, int attributes, string dataTypeDefinition)[] columnNames)
     {
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnConstant>();
+        var columnList = new List<ColumnInfo>();
 
         foreach (var column in columnNames)
         {
-            columnList.Add(new ColumnConstant(TableName, column.ColumnName, (ColumnAttributes)column.attributes, column.dataTypeDefinition));
+            columnList.Add(new ColumnInfo(TableName, column.ColumnName, (ColumnAttributes)column.attributes, column.dataTypeDefinition));
         }
 
         Columns = columnList;
@@ -96,31 +96,31 @@ public class TableConstant
 
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TableConstant"/> class.
+    /// Initializes a new instance of the <see cref="TableInfo"/> class.
     /// </summary>
     /// <param name="qualifiedTableName">The qualified table name.</param>
     /// <param name="attributes">The attributes of the table.</param>
     /// <param name="columnNames">The names and updatable flags of the columns.</param>
-    public TableConstant(string qualifiedTableName, int attributes, params (string ColumnName, bool IsUpdatable)[] columnNames)
+    public TableInfo(string qualifiedTableName, int attributes, params (string ColumnName, bool IsUpdatable)[] columnNames)
     {
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnConstant>();
+        var columnList = new List<ColumnInfo>();
 
         foreach (var (columnName, isUpdatable) in columnNames)
         {
-            columnList.Add(new ColumnConstant(TableName, columnName, isUpdatable));
+            columnList.Add(new ColumnInfo(TableName, columnName, isUpdatable));
         }
 
         Columns = columnList;
     }
 
     /// <summary>
-    /// Implicitly converts a <see cref="TableConstant"/> to a <see cref="QualifiedTableName"/>.
+    /// Implicitly converts a <see cref="TableInfo"/> to a <see cref="QualifiedTableName"/>.
     /// </summary>
-    /// <param name="source">The source <see cref="TableConstant"/>.</param>
-    public static implicit operator QualifiedTableName(TableConstant source)
+    /// <param name="source">The source <see cref="TableInfo"/>.</param>
+    public static implicit operator QualifiedTableName(TableInfo source)
     {
         return source.TableName;
     }
