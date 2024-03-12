@@ -1,8 +1,9 @@
 ﻿namespace DevKits.Data.Core;
 
+using DevKits.OddsAndEnds.Core.Collections;
 using OddsAndEnds.Core;
 
-public class TableList : KeyedCollectionEx<QualifiedTableName, TableInfo>
+public class TableList : KeyedCollectionPlus<QualifiedTableName, TableInfo>
 {
 
     #region Overrides of KeyedCollection<QualifiedTableName,TableInfo>
@@ -19,9 +20,9 @@ public class TableList : KeyedCollectionEx<QualifiedTableName, TableInfo>
 }
 
 
-public class ColumnList : KeyedCollectionEx<QualifiedTableColumnName, ColumnInfo>
+public class ColumnList : KeyedCollectionPlus<QualifiedTableColumnName, ColumnInfo>
 {
-    #region Overrides of KeyedCollection<QualifiedTableName,TableInfo>
+    #region Overrides of KeyedCollection<QualifiedTableName,ColumnInfo>
 
     /// <summary>When implemented in a derived class, extracts the key from the specified element.</summary>
     /// <param name="item">The element from which to extract the key.</param>

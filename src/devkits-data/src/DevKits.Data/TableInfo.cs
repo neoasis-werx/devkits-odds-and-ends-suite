@@ -50,7 +50,7 @@ public class TableInfo
     /// <summary>
     /// Gets the list of columns in the table.
     /// </summary>
-    public IReadOnlyList<ColumnInfo> Columns { get; }
+    public ColumnList Columns { get; }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TableInfo"/> class.
@@ -63,7 +63,7 @@ public class TableInfo
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnInfo>();
+        var columnList = new ColumnList();
 
         foreach (var column in columnNames)
         {
@@ -84,7 +84,7 @@ public class TableInfo
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnInfo>();
+        var columnList = new ColumnList();
 
         foreach (var column in columnNames)
         {
@@ -106,7 +106,7 @@ public class TableInfo
         TableName = new QualifiedTableName(qualifiedTableName);
         Attributes = (TableAttributes)attributes;
 
-        var columnList = new List<ColumnInfo>();
+        var columnList = new ColumnList();
 
         foreach (var (columnName, isUpdatable) in columnNames)
         {
