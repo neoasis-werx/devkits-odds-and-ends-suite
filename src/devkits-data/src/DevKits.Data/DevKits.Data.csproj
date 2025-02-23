@@ -1,26 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <Deterministic>True</Deterministic>
-    <Authors>Deerwood McCord, Jr</Authors>
-    <Company>Neoasis</Company>
-    <Title>DevKits Data Tools</Title>
-    <Description>DevKits Data Tools</Description>
-    <PackageId>Neoasis.DevKits.Data</PackageId>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <IncludeSymbols>True</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\devkits-oddsandends-core\src\DevKits.OddsAndEnds.Core\DevKits.OddsAndEnds.Core.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net8.0</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Deterministic>True</Deterministic>
+		<Authors>Deerwood McCord, Jr</Authors>
+		<Company>Neoasis</Company>
+		<Title>DevKits Data Tools</Title>
+		<Description>DevKits Data Tools</Description>
+		<PackageId>Neoasis.DevKits.Data</PackageId>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaColumns.sql" />
+		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaTableConstraints.sql" />
+		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaTables.sql" />
+	</ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaColumns.sql" />
+		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaTableConstraints.sql" />
+		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaTables.sql" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\devkits-oddsandends-core\src\DevKits.OddsAndEnds.Core\DevKits.OddsAndEnds.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.1.35" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+	</ItemGroup>
 </Project>

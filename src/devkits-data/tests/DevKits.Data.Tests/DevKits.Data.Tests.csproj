@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+    <TargetFrameworks>net8.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
@@ -19,6 +19,8 @@
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\libs\devkits-odds-and-ends\src\DevKits.OddsAndEnds.Diagnostic.Tools\DevKits.OddsAndEnds.Diagnostic.Tools.csproj" />
+    <ProjectReference Include="..\..\..\devkits-testtools\src\DevKits.TestTools\DevKits.TestTools.csproj" />
     <ProjectReference Include="..\..\..\devkits-testtools\tests\DevKits.TestTools.Tests\DevKits.TestTools.Tests.csproj" />
     <ProjectReference Include="..\..\src\DevKits.Data\DevKits.Data.csproj" />
   </ItemGroup>
