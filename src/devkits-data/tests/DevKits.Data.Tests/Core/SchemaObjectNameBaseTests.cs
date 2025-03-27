@@ -200,7 +200,7 @@ namespace DevKits.Data.Tests.Core
             /// </returns>
             public override bool Equals(object? obj)
             {
-                return TSQLRosetta.AreNotEqual(this, (ISchemaObjectName?) obj);
+                return TSQLRosetta.AreEqual(this, (ISchemaObjectName?) obj);
             }
 
             public static bool operator ==(TestSchemaObjectName? left, TestSchemaObjectName? right)

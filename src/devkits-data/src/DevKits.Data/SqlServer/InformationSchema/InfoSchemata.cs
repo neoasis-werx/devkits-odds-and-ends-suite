@@ -92,7 +92,7 @@ public class InfoSchemata
         using var conn = GetConnection();
 
         DefaultTypeMap.MatchNamesWithUnderscores = true;
-        var results = conn.Query<InfoSchemaTableConstraint>(SQLQueries.SelectInfoSchemaTableConstraints, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
+        var results = conn.Query<InfoSchemaTableConstraint>(SQLQueries.SelectInfoSchemaTableConstraintsRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
         return new List<InfoSchemaTableConstraint>(results);
     }
 

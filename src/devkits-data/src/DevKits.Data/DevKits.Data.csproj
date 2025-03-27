@@ -17,11 +17,13 @@
 	<ItemGroup>
 		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaColumns.sql" />
 		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaTableConstraints.sql" />
+		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaTableConstraintsRanked.sql" />
 		<None Remove="SqlServer\InformationSchema\SelectInfoSchemaTables.sql" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaColumns.sql" />
 		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaTableConstraints.sql" />
+		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaTableConstraintsRanked.sql" />
 		<EmbeddedResource Include="SqlServer\InformationSchema\SelectInfoSchemaTables.sql" />
 	</ItemGroup>
 	<ItemGroup>

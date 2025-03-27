@@ -3,6 +3,7 @@
 /// <summary>
 /// Values that represent SQL level zero types.
 /// The type of level 0 object. @level0type is varchar(128), with a default of None (NULL).
+/// <see href="https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-addextendedproperty-transact-sql?view=sql-server-ver16">Extended property levels</see>
 /// </summary>
 public enum SqlLevelZeroTypes
 {

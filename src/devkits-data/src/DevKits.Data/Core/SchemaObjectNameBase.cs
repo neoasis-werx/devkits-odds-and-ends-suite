@@ -81,12 +81,12 @@ public abstract class SchemaObjectNameBase : ISchemaObjectName
     /// <returns>A string that represents the current object.</returns>
     public override string ToString()
     {
-        return TSQLRosetta.JoinIfNotEmpty(".", SchemaName, MyObjectName) ?? string.Empty;
+        return TSQLRosetta.JoinIfNotEmpty(".", SchemaName, MyObjectName);
     }
 
     public string ToQuotedSqlString()
     {
-        return TSQLRosetta.JoinIfNotEmpty(".", TSQLRosetta.QuoteName(SchemaName), TSQLRosetta.QuoteName(MyObjectName)) ?? string.Empty;
+        return TSQLRosetta.JoinIfNotEmpty(".", TSQLRosetta.QuoteName(SchemaName), TSQLRosetta.QuoteName(MyObjectName));
     }
 
     #endregion
@@ -229,7 +229,6 @@ public abstract class SchemaObjectNameBase : ISchemaObjectName
     /// <summary>
     /// Less-than-or-equal comparison operator.
     /// </summary>
-    /// <typeparam name="=">Type of the =.</typeparam>
     /// <param name="leftSide">The left operand.</param>
     /// <param name="rightSide">The right operand.</param>
     /// <returns>The result of the operation.</returns>

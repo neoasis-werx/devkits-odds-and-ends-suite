@@ -74,7 +74,7 @@ public sealed class QualifiedTableColumnName : IEquatable<QualifiedTableColumnNa
     /// <returns>A quoted string representing this fully qualified column name.</returns>
     public string ToQuotedSqlString()
     {
-        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName.ToQuotedSqlString(), TSQLRosetta.QuoteName(ColumnName));
+        return TSQLRosetta.JoinIfNotEmpty(".", QualifiedTableName.ToQuotedSqlString(), QuotedColumnName);
     }
 
 
