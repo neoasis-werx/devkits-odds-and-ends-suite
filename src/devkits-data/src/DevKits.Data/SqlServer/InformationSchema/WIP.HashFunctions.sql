@@ -126,7 +126,6 @@ AS
 BEGIN
     RETURN TRY_CAST(HASHBYTES(@HashType, rawAltKronosProc.CreateTimeAndAttendanceCompositeKey(@TenantId, @Employee_ID, @Clock_In, @Clock_Out, @Worked_Department, @Worked_Job, @Total_Hours, @Total_Dollars, @Pay_Type)) AS VARBINARY(32));
 END;
-
 GO
 
 CREATE FUNCTION rawAltKronosProc.CreateTimeAndAttendanceCompositeKeyEx
