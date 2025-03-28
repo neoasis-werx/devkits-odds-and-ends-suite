@@ -40,12 +40,14 @@ public class SqlServerSchemaProviderTests
     }
 
 
-    // [Test]
+    [Test]
     public void InfoSchemata_TestLoadTables()
     {
         var builder = new SqlConnectionStringBuilder();
 
-        builder.ConnectionString = "Server=tcp:dev-sql-thi-1-rocya.database.windows.net,1433;Initial Catalog={CHI_THI_DATABASE};Persist Security Info=False;User ID={UserName};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=\"Active Directory Integrated\";";
+        var CHI_THI_DATABASE = "DCM_chi_tlp_Alomere";
+        var UserName = "d.mccord@craneware.com";
+        builder.ConnectionString = $"Server=tcp:dev-sql-thi-1-rocya.database.windows.net,1433;Initial Catalog={CHI_THI_DATABASE};Persist Security Info=False;User ID={UserName};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=\"Active Directory Integrated\";";
         builder.Authentication = SqlAuthenticationMethod.ActiveDirectoryInteractive;
         Console.WriteLine(builder.ConnectionString);
 
@@ -66,7 +68,7 @@ public class SqlServerSchemaProviderTests
         //ResourceUtilities.ReadTextFile("DevKits.Data.SqlServer.InformationSchema.SelectInfoSchemaColumns.sql").DumpViz();
 
         ResourceUtilities.GetResourceNames<InfoSchemata>().DumpViz();
-        ResourceUtilities.ReadTextFile<InfoSchemata>("SelectInfoSchemaTables.sql").DumpViz();
+        var sql = ResourceUtilities.ReadTextFile<InfoSchemata>("SelectInfoSchemaTables.sql").DumpViz();
 
     }
 }

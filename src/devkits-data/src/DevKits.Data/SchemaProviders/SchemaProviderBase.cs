@@ -10,10 +10,10 @@ public abstract class SchemaProviderBase
         ConnectionString = connectionString;
     }
 
-    protected DatabaseList Databases = new();
-    protected TableList Tables = new();
-    protected SchemaList Schemas = new();
-    protected ColumnList Columns = new();
+    protected DatabaseCollection Databases = new();
+    protected TableCollection Tables = new();
+    protected SchemaCollection Schemas = new();
+    protected ColumnCollection Columns = new();
 
 
     /// <summary>
@@ -21,14 +21,14 @@ public abstract class SchemaProviderBase
     /// </summary>
     public string ConnectionString { get; init; }
 
-    public abstract TableList LoadTables();
-    public abstract TableList LoadTables(string databaseName);
+    public abstract TableCollection LoadTables();
+    public abstract TableCollection LoadTables(string databaseName);
 
-    public abstract SchemaList LoadSchemas();
-    public abstract DatabaseList LoadDatabases();
+    public abstract SchemaCollection LoadSchemas();
+    public abstract DatabaseCollection LoadDatabases();
 
     public abstract TableInfo LoadTableInfo(QualifiedTableName tableName);
-    public abstract ColumnList LoadTableColumns(QualifiedTableName tableName);
+    public abstract ColumnCollection LoadTableColumns(QualifiedTableName tableName);
     public abstract DatabaseInfo LoadDatabaseInfo(string databaseName);
     public abstract DatabaseInfo LoadDatabaseInfo(string databaseName, params QualifiedTableName[] tables);
 

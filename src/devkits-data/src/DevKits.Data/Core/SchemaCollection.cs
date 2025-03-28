@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 /// <summary>
 /// Represents a collection of schemas.
 /// </summary>
-public class SchemaList : KeyedCollection<string, SchemaInfo>
+public class SchemaCollection : KeyedCollection<string, SchemaInfo>
 {
     /// <summary>
     /// Gets the key for the specified schema.

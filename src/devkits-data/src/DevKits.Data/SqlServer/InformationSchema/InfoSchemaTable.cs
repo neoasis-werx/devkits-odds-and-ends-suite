@@ -65,5 +65,5 @@ public class InfoSchemaTable
     /// <summary>
     /// Gets or sets the list of columns in the table.
     /// </summary>
-    public InfoSchemaColumnList Columns { get; set; } = new();
+    public InfoSchemaColumnCollection Columns { get; set; } = new();
 }

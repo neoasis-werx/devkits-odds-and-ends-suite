@@ -8,20 +8,20 @@ using OddsAndEnds.Core.Collections;
 /// </summary>
 ///
 /// <seealso cref="KeyedCollectionPlus{QualifiedTableName,InfoSchemaTable}"/>
-public class InfoSchemaTableList : KeyedCollectionPlus<QualifiedTableName, InfoSchemaTable>
+public class InfoSchemaTableCollection : KeyedCollectionPlus<QualifiedTableName, InfoSchemaTable>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="InfoSchemaTableList"/> class that uses the default equality comparer.
+    /// Initializes a new instance of the <see cref="InfoSchemaTableCollection"/> class that uses the default equality comparer.
     /// </summary>
-    public InfoSchemaTableList(IEnumerable<InfoSchemaTable> tables)
+    public InfoSchemaTableCollection(IEnumerable<InfoSchemaTable> tables)
     {
         AddRange(tables);
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="InfoSchemaTableList"/> class that uses the default equality comparer.
+    /// Initializes a new instance of the <see cref="InfoSchemaTableCollection"/> class that uses the default equality comparer.
     /// </summary>
-    public InfoSchemaTableList()
+    public InfoSchemaTableCollection()
     {
     }
 

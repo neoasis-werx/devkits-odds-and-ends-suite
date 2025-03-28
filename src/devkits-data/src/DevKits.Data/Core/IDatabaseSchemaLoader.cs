@@ -38,13 +38,13 @@ public interface IDatabaseSchemaLoader
     /// </summary>
     /// <param name="databaseName">The name of the database.</param>
     /// <returns>The list of tables.</returns>
-    TableList LoadTables(string databaseName);
+    TableCollection LoadTables(string databaseName);
 
     /// <summary>
     /// Loads the list of columns for the specified table.
     /// </summary>
     /// <param name="tableName">The qualified table name.</param>
     /// <returns>The list of columns.</returns>
-    ColumnList LoadTableColumns(QualifiedTableName tableName);
+    ColumnCollection LoadTableColumns(QualifiedTableName tableName);
 }
 

@@ -16,7 +16,7 @@ public class SchemaInfo : ISchemaInfo
     /// <summary>
     /// Gets or sets the list of tables in the schema.
     /// </summary>
-    public TableList Tables { get; set; } = new TableList();
+    public TableCollection Tables { get; set; } = new TableCollection();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SchemaInfo"/> class.

@@ -29,14 +29,14 @@ public class InfoSchemata
     /// </summary>
     /// <param name="qualifiedTableName">The qualified name of the table.</param>
     /// <param name="schemaName">The name of the schema.</param>
-    /// <returns>A <see cref="InfoSchemaTableList"/> containing the information schema tables.</returns>
-    public InfoSchemaTableList GetInfoSchemaTables(string? qualifiedTableName = null, string? schemaName = null)
+    /// <returns>A <see cref="InfoSchemaTableCollection"/> containing the information schema tables.</returns>
+    public InfoSchemaTableCollection GetInfoSchemaTables(string? qualifiedTableName = null, string? schemaName = null)
     {
         using var conn = GetConnection();
 
-        DefaultTypeMap.MatchNamesWithUnderscores = true;
+        SetupDapper();
         var results = conn.Query<InfoSchemaTable>(SQLQueries.SelectInfoSchemaTablesRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
-        return new InfoSchemaTableList(results);
+        return new InfoSchemaTableCollection(results);
     }
 
     /// <summary>
@@ -44,14 +44,14 @@ public class InfoSchemata
     /// </summary>
     /// <param name="qualifiedTableName">The qualified name of the table.</param>
     /// <param name="schemaName">The name of the schema.</param>
-    /// <returns>A <see cref="InfoSchemaColumnList"/> containing the information schema columns.</returns>
-    public InfoSchemaColumnList GetInfoSchemaColumns(string? qualifiedTableName = null, string? schemaName = null)
+    /// <returns>A <see cref="InfoSchemaColumnCollection"/> containing the information schema columns.</returns>
+    public InfoSchemaColumnCollection GetInfoSchemaColumns(string? qualifiedTableName = null, string? schemaName = null)
     {
         using var conn = GetConnection();
 
-        DefaultTypeMap.MatchNamesWithUnderscores = true;
+        SetupDapper();
         var results = conn.Query<InfoSchemaColumn>(SQLQueries.SelectInfoSchemaColumnsRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
-        return new InfoSchemaColumnList(results);
+        return new InfoSchemaColumnCollection(results);
     }
 
     /// <summary>
@@ -59,14 +59,14 @@ public class InfoSchemata
     /// </summary>
     /// <param name="qualifiedTableName">The qualified name of the table.</param>
     /// <param name="schemaName">The name of the schema.</param>
-    /// <returns>A <see cref="InfoSchemaTableList"/> containing the information schema tables and their columns.</returns>
-    public InfoSchemaTableList GetInfoSchemaTablesTree(string? qualifiedTableName = null, string? schemaName = null)
+    /// <returns>A <see cref="InfoSchemaTableCollection"/> containing the information schema tables and their columns.</returns>
+    public InfoSchemaTableCollection GetInfoSchemaTablesTree(string? qualifiedTableName = null, string? schemaName = null)
     {
         using var conn = GetConnection();
 
-        DefaultTypeMap.MatchNamesWithUnderscores = true;
+        SetupDapper();
         var result = conn.Query<InfoSchemaTable>(SQLQueries.SelectInfoSchemaTablesRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
-        var infoTables = new InfoSchemaTableList(result);
+        var infoTables = new InfoSchemaTableCollection(result);
 
         var columns = GetInfoSchemaColumns(qualifiedTableName, schemaName);
 
@@ -91,7 +91,7 @@ public class InfoSchemata
     {
         using var conn = GetConnection();
 
-        DefaultTypeMap.MatchNamesWithUnderscores = true;
+        SetupDapper();
         var results = conn.Query<InfoSchemaTableConstraint>(SQLQueries.SelectInfoSchemaTableConstraintsRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
         return new List<InfoSchemaTableConstraint>(results);
     }
@@ -99,5 +99,10 @@ public class InfoSchemata
     private SqlConnection GetConnection()
     {
         return new SqlConnection(ConnectionString);
+    }
+
+    private static void SetupDapper()
+    {
+        DefaultTypeMap.MatchNamesWithUnderscores = true;
     }
 }

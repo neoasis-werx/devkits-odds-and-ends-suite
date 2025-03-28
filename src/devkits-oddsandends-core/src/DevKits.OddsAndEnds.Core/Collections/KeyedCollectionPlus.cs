@@ -49,7 +49,25 @@ public abstract class KeyedCollectionPlus<TKey, TItem> : KeyedCollection<TKey, T
     {
         foreach (var item in collection)
         {
-            TryAdd(item);
+           //TryAdd(item);
+           Add(item);
         }
+    }
+
+
+    /// <summary>
+    /// Tries to add a range of items to the <see cref="IKeyedCollection{TKey,TItem}"/>.
+    /// </summary>
+    /// <param name="collection">The collection of items to add.</param>
+    /// <returns><c>true</c> if all items were added successfully; otherwise, <c>false</c> if one or more items could not be added.</returns>
+    public bool TryAddRange(IEnumerable<TItem> collection)
+    {
+        var success = true;
+        foreach (var item in collection)
+        {
+            success &= TryAdd(item);
+        }
+
+        return success;
     }
 }

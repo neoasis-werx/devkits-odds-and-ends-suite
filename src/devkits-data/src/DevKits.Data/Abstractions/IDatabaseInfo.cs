@@ -22,10 +22,10 @@ public interface IDatabaseInfo
     /// <summary>
     /// Gets or sets the list of tables in the database.
     /// </summary>
-    TablesList Tables { get; set; }
+    TableSet Tables { get; set; }
 
     /// <summary>
     /// Gets or sets the list of schemas in the database.
     /// </summary>
-    SchemasList Schemas { get; set; }
+    SchemaSet Schemas { get; set; }
 }

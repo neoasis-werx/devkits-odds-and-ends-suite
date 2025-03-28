@@ -38,10 +38,10 @@ public class DatabaseInfo
     /// <summary>
     /// Gets or sets the list of tables in the database.
     /// </summary>
-    public TableList Tables { get; set; } = new TableList();
+    public TableCollection Tables { get; set; } = new TableCollection();
 
     /// <summary>
     /// Gets or sets the list of schemas in the database.
     /// </summary>
-    public SchemaList Schemas { get; set; } = new SchemaList();
+    public SchemaCollection Schemas { get; set; } = new SchemaCollection();
 }

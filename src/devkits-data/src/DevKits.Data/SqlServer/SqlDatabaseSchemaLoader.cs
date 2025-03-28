@@ -55,7 +55,7 @@ public class SqlDatabaseSchemaLoader : IDatabaseSchemaLoader
     /// </summary>
     /// <param name="databaseName">The name of the database.</param>
     /// <returns>The list of tables.</returns>
-    public TableList LoadTables(string databaseName)
+    public TableCollection LoadTables(string databaseName)
     {
         throw new NotImplementedException();
     }
@@ -65,7 +65,7 @@ public class SqlDatabaseSchemaLoader : IDatabaseSchemaLoader
     /// </summary>
     /// <param name="tableName">The qualified table name.</param>
     /// <returns>The list of columns.</returns>
-    public ColumnList LoadTableColumns(QualifiedTableName tableName)
+    public ColumnCollection LoadTableColumns(QualifiedTableName tableName)
     {
         throw new NotImplementedException();
     }

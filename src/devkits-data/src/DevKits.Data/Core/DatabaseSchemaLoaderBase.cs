@@ -46,14 +46,14 @@ public abstract class DatabaseSchemaLoaderBase : IDatabaseSchemaLoader
     /// </summary>
     /// <param name="databaseName">The name of the database.</param>
     /// <returns>The list of tables.</returns>
-    public abstract TableList LoadTables(string databaseName);
+    public abstract TableCollection LoadTables(string databaseName);
 
     /// <summary>
     /// Loads the list of columns for the specified table.
     /// </summary>
     /// <param name="tableName">The qualified table name.</param>
     /// <returns>The list of columns.</returns>
-    public abstract ColumnList LoadTableColumns(QualifiedTableName tableName);
+    public abstract ColumnCollection LoadTableColumns(QualifiedTableName tableName);
 
     #endregion
 }

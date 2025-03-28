@@ -47,5 +47,5 @@ public interface ITableInfo
     /// <summary>
     /// Gets the list of columns in the table.
     /// </summary>
-    ColumnsList Columns { get; }
+    ColumnSet Columns { get; }
 }

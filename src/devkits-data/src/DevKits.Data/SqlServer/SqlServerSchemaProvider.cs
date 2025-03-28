@@ -27,17 +27,17 @@ public class SqlServerSchemaProvider : SchemaProviderBase
 
     #region Overrides of SchemaProviderBase
 
-    public override TableList LoadTables()
+    public override TableCollection LoadTables()
     {
         throw new NotImplementedException();
     }
 
-    public override SchemaList LoadSchemas()
+    public override SchemaCollection LoadSchemas()
     {
         throw new NotImplementedException();
     }
 
-    public override DatabaseList LoadDatabases()
+    public override DatabaseCollection LoadDatabases()
     {
         throw new NotImplementedException();
     }
@@ -47,7 +47,7 @@ public class SqlServerSchemaProvider : SchemaProviderBase
         throw new NotImplementedException();
     }
 
-    public override ColumnList LoadTableColumns(QualifiedTableName tableName)
+    public override ColumnCollection LoadTableColumns(QualifiedTableName tableName)
     {
         throw new NotImplementedException();
     }
@@ -62,7 +62,7 @@ public class SqlServerSchemaProvider : SchemaProviderBase
         throw new NotImplementedException();
     }
 
-    public override TableList LoadTables(string databaseName)
+    public override TableCollection LoadTables(string databaseName)
     {
         throw new NotImplementedException();
     }
