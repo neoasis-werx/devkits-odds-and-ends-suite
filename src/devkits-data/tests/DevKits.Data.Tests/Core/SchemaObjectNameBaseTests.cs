@@ -51,7 +51,7 @@ namespace DevKits.Data.Tests.Core
             bool result = schemaObjectName1.Equals(schemaObjectName2);
 
             // Assert
-            Assert.IsTrue(result);
+            Assert.That(result, Is.True);
         }
 
         [Test]
@@ -83,7 +83,7 @@ namespace DevKits.Data.Tests.Core
             bool result = schemaObjectName1.Equals(schemaObjectName2);
 
             // Assert
-            Assert.IsFalse(result);
+            Assert.That(result, Is.False);
         }
 
         [Test]
@@ -137,7 +137,8 @@ namespace DevKits.Data.Tests.Core
             int result = schemaObjectName1.CompareTo(schemaObjectName2);
 
             // Assert
-            Assert.Less(result, 0);
+            //Assert.Less(result, 0)
+            Assert.That(result, Is.LessThan(0));
         }
 
         [Test]
@@ -155,7 +156,7 @@ namespace DevKits.Data.Tests.Core
             int result = schemaObjectName1.CompareTo(schemaObjectName2);
 
             // Assert
-            Assert.Greater(result, 0);
+            Assert.That(result, Is.GreaterThan(0));
         }
 
         [Test]

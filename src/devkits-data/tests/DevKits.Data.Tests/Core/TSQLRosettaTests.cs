@@ -27,9 +27,9 @@
         [TestCase("Database.Schema.Object", "Object", "Schema", "Database", null)]
         [TestCase("Schema.Object", "Object", "Schema", null, null)]
         [TestCase("Object", "Object", "dbo", null, null)]
-        public void ParseNameComponents_ShouldReturnCorrectDbSchemaObjectName(string qualifiedSqlObjectName, string expectedObjectName, string expectedSchemaName, string expectedDatabaseName, string expectedServerName)
+        public void ParseNameComponents_ShouldReturnCorrectDbSchemaObjectName(string? qualifiedSqlObjectName, string? expectedObjectName, string? expectedSchemaName, string? expectedDatabaseName, string? expectedServerName)
         {
-            var result = TSQLRosetta.ParseNameComponents(qualifiedSqlObjectName);
+            var result = TSQLRosetta.ParseNameComponents(qualifiedSqlObjectName!);
 
             Assert.That(result.ObjectName, Is.EqualTo(expectedObjectName));
             Assert.That(result.SchemaName, Is.EqualTo(expectedSchemaName));
@@ -46,7 +46,7 @@
         [TestCase("Object", "`", ExpectedResult = "`Object`")]
         [TestCase(null, ExpectedResult = null)]
         [TestCase("", ExpectedResult = null)]
-        public string? QuoteName_ShouldReturnQuotedString(string characterString, string quoteCharacters = "[]")
+        public string? QuoteName_ShouldReturnQuotedString(string? characterString, string quoteCharacters = "[]")
         {
             return TSQLRosetta.QuoteName(characterString, quoteCharacters);
         }
@@ -60,7 +60,7 @@
         [TestCase("`Object`", ExpectedResult = "Object")]
         [TestCase(null, ExpectedResult = null)]
         [TestCase("", ExpectedResult = "")]
-        public string? RemoveQuotes_ShouldReturnUnquotedString(string characterString)
+        public string? RemoveQuotes_ShouldReturnUnquotedString(string? characterString)
         {
             return TSQLRosetta.RemoveQuotes(characterString);
         }
@@ -71,7 +71,7 @@
         [TestCase(null, null, ExpectedResult = true)]
         [TestCase("string1", null, ExpectedResult = false)]
         [TestCase(null, "string1", ExpectedResult = false)]
-        public bool AreEqual_ShouldReturnCorrectResult(string source, string other)
+        public bool AreEqual_ShouldReturnCorrectResult(string? source, string? other)
         {
             return TSQLRosetta.AreEqual(source, other);
         }
@@ -82,7 +82,7 @@
         [TestCase(null, "string2", "string3", ExpectedResult = "string2.string3")]
         [TestCase(null, null, "string3", ExpectedResult = "string3")]
         [TestCase(null, null, null, ExpectedResult = "")]
-        public string JoinIfNotEmpty_ShouldReturnConcatenatedString(params string[] stringArgs)
+        public string JoinIfNotEmpty_ShouldReturnConcatenatedString(params string?[] stringArgs)
         {
             return TSQLRosetta.JoinIfNotEmpty(".", stringArgs);
         }
@@ -93,9 +93,9 @@
         [TestCase(new[] { "string1", "string2" }, null, ExpectedResult = false)]
         [TestCase(null, new[] { "string1", "string2" }, ExpectedResult = false)]
         [TestCase(null, null, ExpectedResult = true)]
-        public bool AreEquals_ShouldReturnCorrectResult(IList<string> source, IList<string> other)
+        public bool AreEquals_ShouldReturnCorrectResult(IList<string?>? source, IList<string?>? other)
         {
-            return TSQLRosetta.AreEquals(source, other);
+            return TSQLRosetta.AreEquals(source!, other!);
         }
 
         [Test]
@@ -108,16 +108,16 @@
             Assert.That(actualHashCode, Is.EqualTo(expectedHashCode));
         }
 
-        [TestCase("string1", "string1", ExpectedResult = 0)]
-        [TestCase("string1", "STRING1", ExpectedResult = 0)]
-        [TestCase("string1", "string2", ExpectedResult = -1)]
-        [TestCase("string2", "string1", ExpectedResult = 1)]
-        [TestCase(null, "string1", ExpectedResult = -1)]
-        [TestCase("string1", null, ExpectedResult = 1)]
-        [TestCase(null, null, ExpectedResult = 0)]
-        public int Compare_ShouldReturnCorrectComparison(string source, string other)
+        [TestCase(arg1: "string1", arg2: "string1", ExpectedResult = 0)]
+        [TestCase(arg1: "string1", arg2: "STRING1", ExpectedResult = 0)]
+        [TestCase(arg1: "string1", arg2: "string2", ExpectedResult = -1)]
+        [TestCase(arg1: "string2", arg2: "string1", ExpectedResult = 1)]
+        [TestCase(arg1: null, arg2: "string1", ExpectedResult = -1)]
+        [TestCase(arg1: "string1", arg2: null, ExpectedResult = 1)]
+        [TestCase(arg1: null, arg2: null, ExpectedResult = 0)]
+        public int Compare_ShouldReturnCorrectComparison(string? source, string? other)
         {
-            return TSQLRosetta.Compare(source, other);
+            return TSQLRosetta.Compare(source: source, other: other);
         }
 
         [Test]

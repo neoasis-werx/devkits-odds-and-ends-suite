@@ -3,11 +3,17 @@ using System.Text;
 
 namespace DevKits.Data
 {
+    using System.Collections.Concurrent;
+
     /// <summary>
     /// Utility class for working with embedded resources in an assembly.
     /// </summary>
     public static class ResourceUtilities
     {
+        private static readonly ConcurrentDictionary<string, string> ResourceStrings = new();
+
+        public static bool UseTextCache { get; set; } = false;
+
         /// <summary>
         /// Creates a new instance of <see cref="ResourceUtility"/> using the specified type <typeparamref name="T"/>.
         /// </summary>
@@ -65,10 +71,15 @@ namespace DevKits.Data
         /// <exception cref="FileNotFoundException">If the resource is not found.</exception>
         public static string ReadTextFile(Type resourceLocalType, string resourceName)
         {
-            resourceName = ResolveFileName(resourceLocalType, resourceName);
-
             // Access the assembly that calls this method
             var assembly = GetAssembly(resourceLocalType);
+
+            resourceName = ResolveFileName(resourceLocalType, resourceName);
+
+            if (UseTextCache && ResourceStrings.TryGetValue(resourceName, out var resourceText))
+            {
+                return resourceText;
+            }
 
             // Use GetManifestResourceStream to access the embedded resource
             using var stream = assembly.GetManifestResourceStream(resourceName);
@@ -79,7 +90,12 @@ namespace DevKits.Data
             }
 
             using StreamReader reader = new StreamReader(stream, Encoding.UTF8);
-            return reader.ReadToEnd();
+            resourceText = reader.ReadToEnd();
+
+            if (UseTextCache)
+                ResourceStrings[resourceName] = resourceText;
+
+            return resourceText;
         }
 
 
@@ -154,9 +170,9 @@ namespace DevKits.Data
         /// <returns>The resolved resource name.</returns>
         public static string ResolveFileName(Type resourceLocalType, string resourceName)
         {
-            ArgumentNullException.ThrowIfNull(resourceName);
+            ArgumentException.ThrowIfNullOrWhiteSpace(resourceName);
 
-            var resourceCleanName = resourceName.Replace("\\", ".");
+            var resourceCleanName = resourceName.Replace("\\", ".").Replace("{{AssemblyName}}", resourceLocalType.Assembly.GetName().Name);
 
             var ns = resourceLocalType.Namespace ?? string.Empty;
             if (resourceCleanName.StartsWith(ns, StringComparison.OrdinalIgnoreCase))
