@@ -9,6 +9,7 @@ using Core;
 public class InfoSchemaColumn
 {
     private QualifiedTableColumnName? _qualifiedTableColumnName;
+    private QualifiedTableName? _qualifiedTableName;
 
     /// <summary>
     /// Gets or sets the table catalog.
@@ -193,7 +194,7 @@ public class InfoSchemaColumn
     /// <summary>
     /// Gets or sets the qualified table name.
     /// </summary>
-    public QualifiedTableName QualifiedTableName { get; set; } = null!;
+    public QualifiedTableName QualifiedTableName => _qualifiedTableName ??= new QualifiedTableName(TableSchema, TableName);
 
     /// <summary>
     /// Gets the qualified table column name.

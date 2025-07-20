@@ -82,7 +82,7 @@ public class ColumnInfo
     /// <summary>
     /// Gets or sets the attributes of the column.
     /// </summary>
-    public ColumnAttributes Attributes { get; private set; } = ColumnAttributes.None;
+    public ColumnAttributes Attributes { get; internal set; } = ColumnAttributes.None;
 
     /// <summary>
     /// Data type definition (suitable for DDL).

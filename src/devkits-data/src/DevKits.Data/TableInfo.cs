@@ -15,7 +15,7 @@ public class TableInfo
     /// <summary>
     /// Gets the attributes of the table.
     /// </summary>
-    public TableAttributes Attributes { get; private set; }
+    public TableAttributes Attributes { get; internal set; }
 
     /// <summary>
     /// Gets a value indicating whether the table is a history table for a system-versioned table.

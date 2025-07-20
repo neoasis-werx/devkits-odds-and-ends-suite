@@ -7,6 +7,9 @@ using Core;
 /// </summary>
 public class InfoSchemaTable
 {
+
+    private QualifiedTableName? _qualifiedTableName;
+
     /// <summary>
     /// Gets or sets the table catalog.
     /// </summary>
@@ -57,10 +60,11 @@ public class InfoSchemaTable
     /// </summary>
     public bool IsSystemVersionedTemporalTable { get; set; }
 
+
     /// <summary>
     /// Gets or sets the qualified table name.
     /// </summary>
-    public QualifiedTableName QualifiedTableName { get; set; } = null!;
+    public QualifiedTableName QualifiedTableName => _qualifiedTableName ??= new QualifiedTableName(TableSchema, TableName);
 
     /// <summary>
     /// Gets or sets the list of columns in the table.

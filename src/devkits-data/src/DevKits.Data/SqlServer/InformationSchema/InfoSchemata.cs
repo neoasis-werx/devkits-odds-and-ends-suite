@@ -86,14 +86,14 @@ public class InfoSchemata
     /// </summary>
     /// <param name="qualifiedTableName">The qualified name of the table.</param>
     /// <param name="schemaName">The name of the schema.</param>
-    /// <returns>A <see cref="List{InfoSchemaTableConstraint}"/> containing the information schema table constraints.</returns>
-    public List<InfoSchemaTableConstraint> GetInfoSchemaTableConstraints(string? qualifiedTableName = null, string? schemaName = null)
+    /// <returns>A <see cref="List{InfoSchemaTableConstraintColumn}"/> containing the information schema table constraints.</returns>
+    public List<InfoSchemaTableConstraintColumn> GetInfoSchemaTableConstraintColumns(string? qualifiedTableName = null, string? schemaName = null)
     {
         using var conn = GetConnection();
 
         SetupDapper();
-        var results = conn.Query<InfoSchemaTableConstraint>(SQLQueries.SelectInfoSchemaTableConstraintsRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
-        return new List<InfoSchemaTableConstraint>(results);
+        var results = conn.Query<InfoSchemaTableConstraintColumn>(SQLQueries.SelectInfoSchemaTableConstraintsRsrc, new { QualifiedTableName = qualifiedTableName, SCHEMA_NAME = schemaName });
+        return new List<InfoSchemaTableConstraintColumn>(results);
     }
 
     private SqlConnection GetConnection()
